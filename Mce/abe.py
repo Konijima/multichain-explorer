@@ -50,7 +50,7 @@ ABE_APPNAME = "MultiChain Explorer"
 ABE_VERSION = __version__
 ABE_URL = 'https://github.com/Konijima/multichain-explorer'
 
-COPYRIGHT_YEARS = '2011-2017'
+COPYRIGHT_YEARS = '2011-' + time.strftime("%Y")
 COPYRIGHT = "Coin Sciences Ltd and Abe developers"
 COPYRIGHT_URL = 'https://github.com/multichain/multichain-explorer'
 # MULTICHAIN END
@@ -71,7 +71,6 @@ DEFAULT_TEMPLATE = """
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>%(title)s</title>
 
@@ -100,7 +99,7 @@ DEFAULT_TEMPLATE = """
     <br><br>
     <p style="font-size: smaller">
         <span style="font-style: italic">
-            Powered by <a target="_blank" href="%(ABE_URL)s">%(APPNAME)s</a>
+            Git <a target="_blank" href="%(ABE_URL)s">%(APPNAME)s</a> &nbsp;|&nbsp; <a target="_blank" href="%(COPYRIGHT_URL)s">%(COPYRIGHT)s</a> &copy; %(COPYRIGHT_YEARS)s
         </span>
         %(download)s
     </p>
