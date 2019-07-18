@@ -2889,7 +2889,7 @@ class Abe:
                 keys = item['keys']
 
             # Create a list of key links
-            prefix = '{}/{}/keyitems/{}'.format(page['dotdot'], escape(chain.name), streamname)
+            prefix = '{}{}/keyitems/{}'.format(page['dotdot'], escape(chain.name), streamname)
             keylinks = ['<a href="{0}/{1}">{1}</a>'.format(prefix, key) for key in keys]
             keyshtml = ', '.join(keylinks)
             # If list is too long, display only first few keys, and enable a popover with the full list
