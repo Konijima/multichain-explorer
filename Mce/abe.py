@@ -48,7 +48,7 @@ __version__ = version.__version__
 # MULTICHAIN START
 ABE_APPNAME = "MultiChain Explorer"
 ABE_VERSION = __version__
-ABE_URL = 'https://github.com/multichain/multichain-explorer'
+ABE_URL = 'https://github.com/Konijima/multichain-explorer'
 
 COPYRIGHT_YEARS = '2011-2017'
 COPYRIGHT = "Coin Sciences Ltd and Abe developers"
@@ -100,7 +100,7 @@ DEFAULT_TEMPLATE = """
     <br><br>
     <p style="font-size: smaller">
         <span style="font-style: italic">
-            Powered by <a href="%(ABE_URL)s">%(APPNAME)s</a>
+            Powered by <a target="_blank" href="%(ABE_URL)s">%(APPNAME)s</a>
         </span>
         %(download)s
     </p>
@@ -897,7 +897,7 @@ class Abe:
                     try:
                         blockjson = abe.store.get_block_by_hash(chain, miner_block['hash'])
                         miner = blockjson['miner']
-                        miner_address = '<a href="' + page['dotdot'] + '/' + escape(chain.name) + '/address/' + miner + '">' + miner + '</a>'
+                        miner_address = '<a href="' + page['dotdot'] + escape(chain.name) + '/address/' + miner + '">' + miner + '</a>'
                     except Exception:
                         miner_address = "Unknown"
 
@@ -1000,7 +1000,7 @@ class Abe:
             miner_address = abe.format_addresses(miner_txout, page['dotdot'], chain)
         else:
             miner = blockjson['miner']
-            miner_address = '<a href="' + page['dotdot'] + '/' + escape(chain.name) + '/address/' + miner + '">' + miner + '</a>'
+            miner_address = '<a href="' + page['dotdot'] + escape(chain.name) + '/address/' + miner + '">' + miner + '</a>'
 # MULTICHAIN END
         body += html_keyvalue_tablerow('Miner', miner_address)
 
@@ -1730,7 +1730,7 @@ class Abe:
                     try:
                         blockjson = abe.store.get_block_by_hash(chain, blk_hash)
                         miner = blockjson['miner']
-                        addressLabel = '<a href="' + page['dotdot'] + '/' + escape(chain.name) + '/address/' + miner + '">' + miner + '</a>'
+                        addressLabel = '<a href="' + page['dotdot'] + escape(chain.name) + '/address/' + miner + '">' + miner + '</a>'
                     except Exception:
                         addressLabel = 'Unknown (not connected)'
                 else:
@@ -1752,7 +1752,7 @@ class Abe:
                 if this_ch == 'o':
                     tx_json = util.jsonrpc(chain_name, chain_url, "getrawtransaction", tx["hash"], 1)
                     v_json = tx_json['vout'][int(v)]
-                    dataref = '{}/{}/txoutdata/{}/{}'.format(page['dotdot'], escape(chain.name), tx["hash"], v)
+                    dataref = '{}{}/txoutdata/{}/{}'.format(page['dotdot'], escape(chain.name), tx["hash"], v)
                 else:
                     v_json = dataref = None
                 abe.show_tx_row_to_html_impl(chain, body, asset_txid_dict, binscript, script_type, data, v_json, dataref)
@@ -2642,7 +2642,7 @@ class Abe:
        # body += ['<table class="table table-bordered table-striped table-condensed">']
         for publisher in publishers:
             address = publisher['publisher']
-            publisher_link = '<a href="' + page['dotdot'] + '/' + escape(chain.name) + '/publisheritems/' + streamname + '/' + address + '">' + address + '</a>'
+            publisher_link = '<a href="' + page['dotdot'] + escape(chain.name) + '/publisheritems/' + streamname + '/' + address + '">' + address + '</a>'
             body += ['<tr><td>', publisher_link,
                      '</td><td>', str(publisher['items']),
                      '</td></tr>']
@@ -2656,7 +2656,7 @@ class Abe:
                  '</tr>\n']
 
         for obj in recentkeys:
-            keylink = '<a href="' + page['dotdot'] + '/' + escape(chain.name)
+            keylink = '<a href="' + page['dotdot'] + escape(chain.name)
             keylink += '/keyitems/' + streamname + '/' + obj['key'] + '">' + obj['key'] + '</a>'
             body += ['<tr><td>', keylink,
                      '</td><td>', str(obj['items']),
@@ -2695,7 +2695,7 @@ class Abe:
         chain = page['chain']
 
         page['title'] = 'Stream Items'
-        page['h1'] = 'Stream: <a href="' + page['dotdot'] + '/' + escape(chain.name) + '/streams/">' + streamname + '</a>'
+        page['h1'] = 'Stream: <a href="' + page['dotdot'] + escape(chain.name) + '/streams/">' + streamname + '</a>'
         body = page['body']
 
         # url = abe.store.get_url_by_chain(chain)
@@ -2815,11 +2815,11 @@ class Abe:
 
             if len(item['publishers'])==1:
                 publisher = item['publishers'][0]
-                publisher_address = '<a href="' + page['dotdot'] + '/' + escape(chain.name) + '/publisheritems/' + streamname + '/' + publisher + '">' + publisher + '</a>'
+                publisher_address = '<a href="' + page['dotdot'] + escape(chain.name) + '/publisheritems/' + streamname + '/' + publisher + '">' + publisher + '</a>'
             else:
                 publisher_address = ''
                 for publisher in item['publishers']:
-                    publisher_link = '<a href="' + page['dotdot'] + '/' + escape(chain.name) + '/publisheritems/' + streamname + '/' + publisher + '">' + publisher + '</a>'
+                    publisher_link = '<a href="' + page['dotdot'] + escape(chain.name) + '/publisheritems/' + streamname + '/' + publisher + '">' + publisher + '</a>'
                     publisher_address += '{0}<br/>'.format(publisher_link)
 
             # A runtime paramater -maxshowndata=20 determines if the node returns data in json output or not.
@@ -2906,7 +2906,7 @@ class Abe:
                 '</td><td>', data_html,
                 # '</td><td>', sizelink,
                 '</td><td>', publisher_address,
-                '</td><td>', '<a href="' + page['dotdot'] + '/' + escape(chain.name) + '/tx/' + txid + '">', txid[0:10], '...</a>',
+                '</td><td>', '<a href="' + page['dotdot'] + escape(chain.name) + '/tx/' + txid + '">', txid[0:10], '...</a>',
                 '</td></tr>\n']
 
         body += ['</table>\n<p>', nav, '</p>\n']
